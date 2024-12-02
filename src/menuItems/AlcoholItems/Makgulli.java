@@ -2,10 +2,10 @@ package menuItems.AlcoholItems;
 
 import menuItems.MenuItem;
 
-public class Beer extends MenuItem {
-    public Beer() {
-        this.name = "맥주";
-        this.description = "빠지면 시원섭섭한 맥주!";
-        this.price = 4000;
+public class Makgulli extends MenuItem {
+    public Makgulli() {
+        this.name = "막걸리";
+        this.description = "부드러운 막걸리!";
+        this.price = 6000;
     }
 }

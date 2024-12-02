@@ -1,11 +1,11 @@
-package menuItems.SnackItems;
+package menuItems.TangItems;
 
 import menuItems.MenuItem;
 
-public class Myeongtae extends MenuItem {
-    public Myeongtae() {
-        this.name = "명태";
-        this.description = "고추마요 소스에 찍어먹는 마른 안주의 정석";
-        this.price = 12000;
+public class Amooktang extends MenuItem {
+    public Amooktang() {
+        this.name = "어묵탕";
+        this.description = "칼칼하고 시원한 어묵탕!";
+        this.price = 10000;
     }
 }

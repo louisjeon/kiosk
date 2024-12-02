@@ -2,10 +2,10 @@ package menuItems.AlcoholItems;
 
 import menuItems.MenuItem;
 
-public class Soju extends MenuItem {
-    public Soju() {
-        this.name = "소주";
-        this.description = "대한민국 대표 소주!";
-        this.price = 3000;
+public class Beer extends MenuItem {
+    public Beer() {
+        this.name = "맥주";
+        this.description = "빠지면 시원섭섭한 맥주!";
+        this.price = 4000;
     }
 }

@@ -1,11 +1,11 @@
-package menuItems.ChickenItems;
+package menuItems.AlcoholItems;
 
 import menuItems.MenuItem;
 
-public class CheongYangMayo extends MenuItem {
-    public CheongYangMayo() {
-        this.name = "청양마요치킨";
-        this.description = "청양고추와 마요네즈의 환상적인 조화!";
-        this.price = 22000;
+public class Soju extends MenuItem {
+    public Soju() {
+        this.name = "소주";
+        this.description = "대한민국 대표 소주!";
+        this.price = 3000;
     }
 }

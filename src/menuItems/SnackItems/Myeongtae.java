@@ -2,10 +2,10 @@ package menuItems.SnackItems;
 
 import menuItems.MenuItem;
 
-public class Tteokbokki extends MenuItem {
-    public Tteokbokki() {
-        this.name = "떡볶이";
-        this.description = "어묵과 쌀떡의 감칠맛나는 조화";
-        this.price = 8000;
+public class Myeongtae extends MenuItem {
+    public Myeongtae() {
+        this.name = "명태";
+        this.description = "고추마요 소스에 찍어먹는 마른 안주의 정석";
+        this.price = 12000;
     }
 }

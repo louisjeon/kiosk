@@ -1,4 +1,7 @@
 package view;
 
-public class PaymentView {
+public class PaymentView extends View{
+    static void viewCheckout() {
+
+    }
 }
