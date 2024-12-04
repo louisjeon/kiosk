@@ -15,14 +15,23 @@ public class Cart {
         totalPrice += item.getPrice() * quantity;
     }
 
-    public static void remove(MenuItem item) {
-        items.remove(item);
-        totalPrice -= item.getPrice();
+    public static void remove(ItemGroup itemGroup) {
+        items.remove(itemGroup);
+        totalPrice -= itemGroup.getItem().getPrice();
     }
 
     public static void clear() {
         items.clear();
         totalPrice = 0;
+    }
+
+    public static void changeQuantity(ItemGroup itemGroup, int quantity) {
+        int index = items.indexOf(itemGroup);
+        int beforeQuantity = itemGroup.getQuantity();
+        int quantityDiff = quantity - beforeQuantity;
+        itemGroup.setQuantity(quantity);
+        totalPrice += itemGroup.getItem().getPrice() * quantityDiff;
+        items.set(index, itemGroup);
     }
 
     public static List<ItemGroup> getItemGroups() {

@@ -1,7 +1,7 @@
 package menuItems;
 
 public class ItemGroup {
-    private MenuItem item;
+    private final MenuItem item;
     private int quantity;
 
     public ItemGroup(MenuItem item, int quantity) {
@@ -15,5 +15,9 @@ public class ItemGroup {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
