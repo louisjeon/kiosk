@@ -1,17 +1,18 @@
 package model;
 
+import menuItems.ItemGroup;
 import menuItems.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    private static ArrayList<MenuItem> items;
+    private static final ArrayList<ItemGroup> items = new ArrayList<>();
     private static int totalPrice = 0;
 
-    public static void add(MenuItem item) {
-        items.add(item);
-        totalPrice += item.getPrice();
+    public static void add(MenuItem item, int quantity) {
+        items.add(new ItemGroup(item, quantity));
+        totalPrice += item.getPrice() * quantity;
     }
 
     public static void remove(MenuItem item) {
@@ -24,7 +25,7 @@ public class Cart {
         totalPrice = 0;
     }
 
-    public static List<MenuItem> getItems() {
+    public static List<ItemGroup> getItemGroups() {
         return items;
     }
 

@@ -18,18 +18,18 @@ public class OrderView extends View {
         for (int i = 0; i < categories.length; i++) {
             str.append("(").append(i + 1).append(")").append(categories[i].getName()).append(" ");
         }
-        str.append("(").append(categories.length).append(") 카트 확인");
+        str.append("(").append(categories.length+1).append(") 카트 확인");
         out.println(str);
         int choice = scanner.nextInt() - 1;
         if (choice < categories.length) {
             Menu.setCurrentCategory(categories[choice]);
-            OrderView.viewItemDetails(OrderView.viewItems());
+            OrderView.viewItems();
         } else if (choice == categories.length) {
             CartView.viewCart();
         }
     }
 
-    private static MenuItem viewItems() {
+    private static void viewItems() {
         out.println("아이템을 선택해주세요.");
         StringBuilder str = new StringBuilder();
         MenuItem[] items = Menu.getCurrentItems();
@@ -38,7 +38,19 @@ public class OrderView extends View {
         }
         str.append("(").append(items.length).append(")").append("뒤로 가기");
         out.println(str);
-        return items[scanner.nextInt()];
+        MenuItem selectedItem = items[scanner.nextInt() - 1];
+        viewItemDetails(selectedItem);
+    }
+
+    private static void afterAddToCart(MenuItem item) {
+        out.println("(1)장바구니 확인 (2)더 담기 (3)메인 메뉴로");
+        int choice = scanner.nextInt();
+        switch (choice) {
+            case 1 -> CartView.viewCart();
+            case 2 -> viewItemDetails(item);
+            case 3 -> OrderView.viewCategory();
+            default -> out.println(WRONG_CHOICE);
+        }
     }
 
     static void viewItemDetails(MenuItem item) {
@@ -46,9 +58,15 @@ public class OrderView extends View {
         out.println("가격: " + item.getPrice());
         out.println(item.getDescription());
         out.println("(1)장바구니 담기 (2)장바구니 확인 (3)메인 메뉴로");
-        int choice = scanner.nextInt() - 1;
+        int choice = scanner.nextInt();
         switch (choice) {
-            case 1 -> Cart.add(item);
+            case 1 -> {
+                out.println("장바구니에 담을 개수를 입력해주세요.");
+                int quantity = scanner.nextInt();
+                Cart.add(item, quantity);
+                out.println("장바구니에 담겼습니다.");
+                afterAddToCart(item);
+            }
             case 2 -> CartView.viewCart(item);
             case 3 -> OrderView.viewCategory();
             default -> out.println(WRONG_CHOICE);

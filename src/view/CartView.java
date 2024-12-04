@@ -1,35 +1,36 @@
 package view;
 
+import menuItems.ItemGroup;
 import menuItems.MenuItem;
 import model.Cart;
 
 import static java.lang.System.out;
 
-public class CartView extends View{
-    static void viewCart() {
-        for (MenuItem item : Cart.getItems()) {
-            out.println(item.getName() + ": " + item.getPrice() + "원");
+public class CartView extends View {
+    private static int getChoice() {
+        out.println("<<장바구니>>");
+        for (ItemGroup itemGroup : Cart.getItemGroups()) {
+            MenuItem item = itemGroup.getItem();
+            out.println(item.getName() + " x" + itemGroup.getQuantity() + ": " + item.getPrice() * itemGroup.getQuantity() + "원");
         }
         out.println("총 금액: " + Cart.getTotalPrice() + "원");
-        out.println("(1)체크 아웃 (2)뒤로 가기");
-        int choice = scanner.nextInt();
-        switch (choice) {
+        out.println("(1)체크 아웃 (2)뒤로 가기 (3)메인 메뉴");
+        return scanner.nextInt();
+    }
+
+    static void viewCart() {
+        switch (getChoice()) {
             case 1 -> PaymentView.viewCheckout();
-            case 2 -> OrderView.viewCategory();
+            case 2,3 -> OrderView.viewCategory();
             default -> out.println(WRONG_CHOICE);
         }
     }
 
     static void viewCart(MenuItem lastViewItem) {
-        for (MenuItem item : Cart.getItems()) {
-            out.println(item.getName() + ": " + item.getPrice() + "원");
-        }
-        out.println("총 금액: " + Cart.getTotalPrice() + "원");
-        out.println("(1)체크 아웃 (2)뒤로 가기");
-        int choice = scanner.nextInt();
-        switch (choice) {
+        switch (getChoice()) {
             case 1 -> PaymentView.viewCheckout();
             case 2 -> OrderView.viewItemDetails(lastViewItem);
+            case 3 -> OrderView.viewCategory();
             default -> out.println(WRONG_CHOICE);
         }
     }
