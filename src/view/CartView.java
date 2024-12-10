@@ -20,7 +20,7 @@ public class CartView extends View {
         return scanner.nextInt();
     }
 
-    private static void selectChangeQuantity(List<ItemGroup> itemGroupList, int choice) {
+    private static void selectChangeQuantity(List<ItemGroup> itemGroupList, int choice) throws InterruptedException {
         ItemGroup itemGroup = itemGroupList.get(choice);
         out.println("[수량 변경 아이템]");
         out.println(itemGroup.getItem().getName() + " x" + itemGroup.getQuantity() + ": " + itemGroup.getItem().getPrice() * itemGroup.getQuantity() + "원");
@@ -33,7 +33,7 @@ public class CartView extends View {
             choice = scanner.nextInt();
             switch (choice) {
                 case 1 -> viewCart();
-                case 2 -> OrderView.viewCategory();
+                case 2 -> OrderView.viewWelcome();
                 default -> out.println(WRONG_CHOICE);
             }
         } else {
@@ -42,7 +42,7 @@ public class CartView extends View {
         }
     }
 
-    private static void selectChangeQuantityItem() {
+    private static void selectChangeQuantityItem() throws InterruptedException {
         if (Cart.getItemGroups().isEmpty()) {
             out.println("장바구니가 비어있습니다.");
             viewCart();
@@ -63,22 +63,27 @@ public class CartView extends View {
         }
     }
 
-    public static void viewCart() {
+    public static void viewCart() throws InterruptedException {
         switch (getChoice()) {
             case 1 -> selectChangeQuantityItem();
-            case 2 -> PaymentView.viewCheckout();
-            case 3,4 -> OrderView.viewCategory();
+            case 2 -> {
+                if (Cart.getItemGroups().isEmpty()) {
+                    out.println("장바구니가 비어있습니다.");
+                    viewCart();
+                } else {
+                    PaymentView.viewCheckout();
+                }
+            }
+            case 3,4 -> OrderView.viewWelcome();
             default -> out.println(WRONG_CHOICE);
         }
     }
 
-    public static void viewCart(MenuItem lastViewItem) {
-        switch (getChoice()) {
-            case 1 -> selectChangeQuantityItem();
-            case 2 -> PaymentView.viewCheckout();
-            case 3 -> OrderView.viewItemDetails(lastViewItem);
-            case 4 -> OrderView.viewCategory();
-            default -> out.println(WRONG_CHOICE);
+    public static void viewCart(MenuItem lastViewItem) throws InterruptedException {
+        if (getChoice() == 3) {
+            OrderView.viewItemDetails(lastViewItem);
+        } else {
+            viewCart();
         }
     }
 }

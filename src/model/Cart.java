@@ -10,8 +10,20 @@ public class Cart {
     private static final ArrayList<ItemGroup> items = new ArrayList<>();
     private static int totalPrice = 0;
 
+    private Cart() {}
+
     public static void add(MenuItem item, int quantity) {
-        items.add(new ItemGroup(item, quantity));
+        boolean found = false;
+        for (ItemGroup itemGroup : items) {
+            if (itemGroup.getItem().equals(item)) {
+                itemGroup.setQuantity(itemGroup.getQuantity() + quantity);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            items.add(new ItemGroup(item, quantity));
+        }
         totalPrice += item.getPrice() * quantity;
     }
 
@@ -21,6 +33,7 @@ public class Cart {
     }
 
     public static void clear() {
+        OrderHistory.addOrder(new Order(items, totalPrice));
         items.clear();
         totalPrice = 0;
     }

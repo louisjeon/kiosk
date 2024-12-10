@@ -7,6 +7,8 @@ public class Menu {
     private static final Category[] categories = new Category[]{new Alcohol(), new Chicken(), new Snack(), new Tang()};
     private static Category currentCategory;
 
+    private Menu(){}
+
     public static Category[] getCategories() {
         return categories;
     }
