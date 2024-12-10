@@ -29,7 +29,7 @@ public class Cart {
 
     public static void remove(ItemGroup itemGroup) {
         items.remove(itemGroup);
-        totalPrice -= itemGroup.getItem().getPrice();
+        totalPrice -= itemGroup.getItem().getPrice() * itemGroup.getQuantity();
     }
 
     public static void clear() {

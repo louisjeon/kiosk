@@ -27,7 +27,11 @@ public class CartView extends View {
         out.println("변경할 수량을 입력해주세요.");
         int quantity = scanner.nextInt();
         if (quantity >= 0) {
-            Cart.changeQuantity(itemGroup, quantity);
+            if (quantity == 0) {
+                Cart.remove(itemGroup);
+            } else {
+                Cart.changeQuantity(itemGroup, quantity);
+            }
             out.println("수량이 변경되었습니다.");
             out.println("(1)카트 확인 (2)메인 메뉴");
             choice = scanner.nextInt();
