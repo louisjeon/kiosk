@@ -109,7 +109,7 @@ public class OrderView extends View {
                     MenuItem item = itemGroup.getItem();
                     str.append("\n").append(item.getName()).append(" x").append(itemGroup.getQuantity()).append(" = ").append(item.getPrice() * itemGroup.getQuantity()).append("원");
                 }
-                str.append("\n총 금액: ").append(order.getTotalPrice()).append("원");
+                str.append("\n총 금액: ").append(order.getTotalPrice()).append("원\n");
             }
         }
         out.println(str);
